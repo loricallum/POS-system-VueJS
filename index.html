@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <title>POS System</title>
+    <title>Point Of Sale System</title>
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -23,36 +23,38 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Number of Items</th>
-                                <th>Amount</th>
-                                <th></th>
+                                <th>Quantity</th>
+                                <th>Pay</th>
+                                <th>Remove</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
-                                <td>Apple</td>
+                            <tr v-repeat="item: lineItems">
+                                <td>{{item.item.name}}</td>
+                                <td>
+                                    <span v-if="!item.editing" v-on="dblclick: toggleEdit(item)">{{item.numberOfItems }}</span>
+                                <input v-if="item.editing" v-on="blur: toggleEdit(item)" type="number" v-model="item.numberOfItems">
+                                    </td>
+                                <td>{{ item.numberOfItems * item.item.price | currency }}</td>
+                                <td><i class="fa fa-times" v-on="click: removeItem(item)"></i></td>
+                            </tr>
+                            {% comment %} <tr>
+                                <td>Oat Milk</td>
                                 <td>
                                     <span>3</span>
                                 </td>
-                                <td>$3.00</td>
+                                <td>£5.00</td>
                                 <td><i class="fa fa-times"></i></td>
                             </tr>
                             <tr>
-                                <td>Milk</td>
+                                <td>Ciabatta Bread</td>
                                 <td>
                                     <span>2</span>
                                 </td>
-                                <td>$5.00</td>
+                                <td>£2.00</td>
                                 <td><i class="fa fa-times"></i></td>
-                            </tr>
-                            <tr>
-                                <td>Pen</td>
-                                <td>
-                                    <span>1</span>
-                                </td>
-                                <td>$2.00</td>
-                                <td><i class="fa fa-times"></i></td>
-                            </tr>
+                            </tr> {% endcomment %}
                         </tbody>
                     </table>
 
@@ -60,29 +62,29 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal:</td>
-                                <td>$10.00</td>
+                                <td>{{ subtotal | currency }}</td>
                             </tr>
                             <tr>
-                                <td>Tax:</td>
-                                <td>$0.63</td>
+                                <td>Tax: </td>
+                                <td>{{  tax | currency }}</td>
                             </tr>
                             <tr>
                                 <td>Total:</td>
-                                <td>$10.63</td>
+                                <td>{{ total | currency }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-md-6">
                     <div class="list-group">
-                        <button class="list-group-item item">
+                        <button class="list-group-item item" v-repeat="item: items" v-on="click: onItemClick(item)">
                             <strong>Apple</strong> - 1.00
                         </button>
                         <button class="list-group-item item">
-                            <strong>Milk</strong> - 2.50
+                            <strong>Oat Milk</strong> - 2.50
                         </button>
                         <button class="list-group-item item">
-                            <strong>Pen</strong> - 2.00
+                            <strong>Ciabatta Bread</strong> - 2.00
                         </button>
                     </div>
                 </div>

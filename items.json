@@ -1,0 +1,55 @@
+[
+
+    {
+        "name": "Apple",
+        "price": 2.99
+
+    },
+
+    {
+        "name": "Orange",
+        "price": 0.99
+
+    },
+
+    {
+        "name": "Pineapple",
+        "price": 2.99
+
+    },
+
+    {
+        "name": "Pomegranate",
+        "price": 0.99
+
+    },
+    {
+        "name": "Strawberries",
+        "price": 2.99
+
+    },
+
+    {
+        "name": "Dark Chilli Chocolate",
+        "price": 1.99
+
+    },
+    {
+        "name": "Vegan fudge",
+        "price": 2.99
+
+    },
+    {
+        "name": "Chocolate coated raisins",
+        "price": 2.99
+
+    },
+
+    {
+        "name": "Card",
+        "price": 0.89
+
+    }
+
+
+]
